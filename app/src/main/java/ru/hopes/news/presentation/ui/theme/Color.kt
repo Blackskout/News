@@ -1,4 +1,4 @@
-package ru.hopes.news.ui.theme
+package ru.hopes.news.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

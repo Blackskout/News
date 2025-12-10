@@ -23,7 +23,7 @@ class NewsRepositoryImpl @Inject constructor(
 ) : NewsRepository {
     override fun getAllSubscriptions(): Flow<List<String>> {
         return newsDao.getAllSubscriptions().map { subscriptions ->
-            subscriptions.map { it.toString() }
+            subscriptions.map { it.topic }
         }
     }
 

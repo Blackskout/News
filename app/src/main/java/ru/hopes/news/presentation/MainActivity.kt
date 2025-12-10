@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.hopes.news.data.remote.NewsApiService
 import ru.hopes.news.data.repository.NewsRepositoryImpl
+import ru.hopes.news.presentation.screen.subscriptions.SubscriptionsScreen
 import ru.hopes.news.presentation.ui.theme.NewsTheme
 import javax.inject.Inject
 
@@ -37,7 +38,9 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             NewsTheme {
-
+                SubscriptionsScreen(
+                    onNavigateToSettings = {}
+                )
             }
         }
     }

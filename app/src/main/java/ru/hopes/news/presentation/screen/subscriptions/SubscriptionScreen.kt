@@ -147,7 +147,7 @@ private fun SubscriptionsTopBar(
                 modifier = Modifier
                     .clip(CircleShape)
                     .clickable {
-                        onRefreshDataClick
+                        onRefreshDataClick()
                     }
                     .padding(8.dp),
                 contentDescription = "refresh",
@@ -157,7 +157,7 @@ private fun SubscriptionsTopBar(
                 modifier = Modifier
                     .clip(CircleShape)
                     .clickable {
-                        onClearArticlesClick
+                        onClearArticlesClick()
                     }
                     .padding(8.dp),
                 contentDescription = "clear articles",
@@ -167,7 +167,7 @@ private fun SubscriptionsTopBar(
                 modifier = Modifier
                     .clip(CircleShape)
                     .clickable {
-                        onSettingsClick
+                        onSettingsClick()
                     }
                     .padding(8.dp),
                 contentDescription = "settings screen",
@@ -351,7 +351,7 @@ private fun ArticleCard(
             ) {
                 Button(
                     modifier = Modifier.weight(1f),
-                    onClick = {}
+                    onClick = {  }
                 ) {
                     Icon(
                         imageVector = CustomIcons.OpenInNew,

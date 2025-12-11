@@ -1,5 +1,6 @@
 package ru.hopes.news.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -12,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,14 +34,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        lifecycleScope.launch {
-            repository.addSubscription("Kotlin")
-            repository.updateArticlesForTopic("Kotlin   ")
-        }
         setContent {
             NewsTheme {
                 SubscriptionsScreen(
-                    onNavigateToSettings = {}
+                    onNavigateToSettings = {
+                        val intent = Intent(Intent.ACTION_VIEW, "news://settings".toUri())
+                        Log.d("TAG", "onCreate:")
+                        startActivity(intent)
+                    }
                 )
             }
         }

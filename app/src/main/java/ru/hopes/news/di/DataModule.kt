@@ -2,6 +2,7 @@ package ru.hopes.news.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.work.WorkManager
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -18,13 +19,20 @@ import ru.hopes.news.data.local.NewsDao
 import ru.hopes.news.data.local.NewsDataBase
 import ru.hopes.news.data.remote.NewsApiService
 import ru.hopes.news.data.repository.NewsRepositoryImpl
+import ru.hopes.news.data.repository.SettingsRepositoryImpl
 import ru.hopes.news.domain.repository.NewsRepository
+import ru.hopes.news.domain.repository.SettingsRepository
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 interface DataModule {
 
+    @Binds
+    @Singleton
+    fun bindsSettingsRepository(
+        impl: SettingsRepositoryImpl
+    ): SettingsRepository
 
     @Binds
     @Singleton
@@ -33,6 +41,14 @@ interface DataModule {
     ): NewsRepository
 
     companion object {
+
+        @Provides
+        @Singleton
+        fun provideWorkManager(
+            @ApplicationContext context: Context
+        ): WorkManager {
+            return WorkManager.getInstance(context)
+        }
 
         @Provides
         @Singleton

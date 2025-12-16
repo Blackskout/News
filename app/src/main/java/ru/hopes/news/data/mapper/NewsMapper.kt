@@ -3,6 +3,7 @@ package ru.hopes.news.data.mapper
 import ru.hopes.news.data.local.ArticleDbModel
 import ru.hopes.news.data.remote.NewsResponseDto
 import ru.hopes.news.domain.entity.Article
+import ru.hopes.news.domain.entity.Interval
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -18,6 +19,10 @@ fun NewsResponseDto.toDbModels(topic: String): List<ArticleDbModel> {
             publishedAt = it.publishedAt.toTimestamp()
         )
     }
+}
+
+fun Int.toInterval(): Interval {
+    return Interval.entries.first { it.minutes == this }
 }
 
 fun List<ArticleDbModel>.toEntities(): List<Article> {

@@ -1,12 +1,16 @@
 package ru.hopes.news.data.repository
 
 import android.util.Log
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import ru.hopes.news.data.background.RefreshDataWorker
 import ru.hopes.news.data.local.ArticleDbModel
 import ru.hopes.news.data.local.NewsDao
 import ru.hopes.news.data.local.SubscriptionDbModel
@@ -15,12 +19,18 @@ import ru.hopes.news.data.mapper.toEntities
 import ru.hopes.news.data.remote.NewsApiService
 import ru.hopes.news.domain.entity.Article
 import ru.hopes.news.domain.repository.NewsRepository
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
     private val newsDao: NewsDao,
-    private val newsApiService: NewsApiService
+    private val newsApiService: NewsApiService,
+    private val workManager: WorkManager,
 ) : NewsRepository {
+
+    init {
+        startBackgroundRefresh()
+    }
     override fun getAllSubscriptions(): Flow<List<String>> {
         return newsDao.getAllSubscriptions().map { subscriptions ->
             subscriptions.map { it.topic }
@@ -67,6 +77,17 @@ class NewsRepositoryImpl @Inject constructor(
         return newsDao.getAllArticlesByTopics(topics).map {
             it.toEntities()
         }
+    }
+
+    private fun startBackgroundRefresh() {
+        val request = PeriodicWorkRequestBuilder<RefreshDataWorker>(
+            repeatInterval = 15L, TimeUnit.MINUTES
+        ).build()
+        workManager.enqueueUniquePeriodicWork(
+            uniqueWorkName = "Refresh data",
+            existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
+            request = request
+        )
     }
 
     override suspend fun clearAllArticles(topics: List<String>) {

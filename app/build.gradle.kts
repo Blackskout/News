@@ -47,7 +47,10 @@ android {
 dependencies {
 
 
-    implementation("com.squareup.okhttp3:logging-interceptor:5.2.1")
+    implementation(libs.hilt.work)
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.logging.interceptor)
     implementation(libs.retrofit)
     implementation(libs.converter.kotlinx.serialization)
     implementation(libs.coil.network.okhttp)
@@ -75,4 +78,5 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation(libs.androidx.datastore.preferences)
 }

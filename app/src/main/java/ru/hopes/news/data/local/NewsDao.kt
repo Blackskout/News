@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy.Companion.IGNORE
 import androidx.room.Query
 import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
-import ru.hopes.news.domain.entity.Article
 
 @Dao
 interface NewsDao {
@@ -16,7 +15,7 @@ interface NewsDao {
     fun getAllSubscriptions(): Flow<List<SubscriptionDbModel>>
 
     @Insert(onConflict = IGNORE)
-    suspend fun addSubscription(subscriptionDbModel: SubscriptionDbModel)
+    suspend fun addSubscription(subscriptionDbModel: SubscriptionDbModel): Long
 
     @Transaction
     @Delete
@@ -26,7 +25,7 @@ interface NewsDao {
     fun getAllArticlesByTopics(topics: List<String>): Flow<List<ArticleDbModel>>
 
     @Insert(onConflict = IGNORE)
-    suspend fun addArticles(articles: List<ArticleDbModel>)
+    suspend fun addArticles(articles: List<ArticleDbModel>): List<Long>
 
     @Query("DELETE FROM articles WHERE topic IN (:topics)")
     suspend fun deleteArticlesByTopics(topics: List<String>)

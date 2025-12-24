@@ -4,6 +4,7 @@ import ru.hopes.news.data.local.ArticleDbModel
 import ru.hopes.news.data.remote.NewsResponseDto
 import ru.hopes.news.domain.entity.Article
 import ru.hopes.news.domain.entity.Interval
+import ru.hopes.news.domain.entity.Language
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -18,6 +19,15 @@ fun NewsResponseDto.toDbModels(topic: String): List<ArticleDbModel> {
             topic = topic,
             publishedAt = it.publishedAt.toTimestamp()
         )
+    }
+}
+
+fun Language.toQueryParam(): String {
+    return when (this) {
+        Language.ENGLISH -> "en"
+        Language.RUSSIAN -> "ru"
+        Language.FRENCH -> "fr"
+        Language.GERMAN -> "de"
     }
 }
 

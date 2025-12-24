@@ -1,24 +1,13 @@
 package ru.hopes.news.presentation
 
-import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.net.toUri
-import androidx.lifecycle.lifecycleScope
-import dagger.hilt.EntryPoint
+import androidx.activity.result.contract.ActivityResultContracts
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import ru.hopes.news.data.remote.NewsApiService
 import ru.hopes.news.data.repository.NewsRepositoryImpl
 import ru.hopes.news.presentation.screen.subscriptions.SubscriptionsScreen
 import ru.hopes.news.presentation.ui.theme.NewsTheme
@@ -36,11 +25,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NewsTheme {
+                val permissionLauncher = rememberLauncherForActivityResult(
+                    contract = ActivityResultContracts.RequestPermission(),
+                    onResult = {}
+                )
                 SubscriptionsScreen(
                     onNavigateToSettings = {
-                        val intent = Intent(Intent.ACTION_VIEW, "news://settings".toUri())
-                        Log.d("TAG", "onCreate:")
-                        startActivity(intent)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+                        }
                     }
                 )
             }

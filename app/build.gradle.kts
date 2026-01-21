@@ -10,7 +10,7 @@ plugins {
 }
 
 private val keystorePropertiesFile = rootProject.file("keystore.properties")
-private val keystoreProperties =keystorePropertiesFile.inputStream().use { inputStream ->
+private val keystoreProperties = keystorePropertiesFile.inputStream().use { inputStream ->
     Properties().apply {
         load(inputStream)
     }
@@ -42,8 +42,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
@@ -51,11 +51,15 @@ android {
     }
 }
 
-
+kotlin {
+    jvmToolchain(17)
+}
 
 dependencies {
 
 
+    //noinspection GradleDependency
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.hilt.work)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.work.runtime.ktx)

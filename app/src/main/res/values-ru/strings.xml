@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">News</string>
+    <string name="subscriptions_title">My News</string>
+    <string name="remove_subscription">удалить подписки</string>
+    <string name="what_interests_you">Какие у вас интересы?</string>
+    <string name="add_subscription">добавить подписку</string>
+    <string name="add_subscription_button">Добавить подписку</string>
+    <string name="subscriptions">Подписки(%1$d)</string>
+    <string name="no_subscriptions">Нет подписок</string>
+    <string name="read">Читать</string>
+    <string name="share_article">Поделиться статьей</string>
+    <string name="share">Поделиться</string>
+    <string name="no_articles_for_selected_subscriptions">Нет статей для выбранных подписок</string>
+    <string name="new_articles">Новые статьи</string>
+    <string name="new_articles_notification_title">Новые статьи</string>
+    <string name="update_subscriptions">Обнавлено %1$d подписок: %2$s</string>
+    <string name="settings">Настройки</string>
+    <string name="search_language">На каком языке искать новости</string>
+    <string name="select_language_for_news_search">Выберите язык для поиска новостей</string>
+    <string name="english">Английский</string>
+    <string name="francais">Французский</string>
+    <string name="deutsch">Немецкий</string>
+    <string name="russian">Русский</string>
+    <string name="update_interval">Интервал обновления</string>
+    <string name="how_often_to_update_new_articles">Как часто обновлять новые статьи</string>
+    <string name="update_only_via_wi_fi">Обновлять только через Wi-Fi</string>
+    <string name="notifications">Уведомления</string>
+    <string name="show_notifications_about_new_articles">Показывать уведомления о новых статьях</string>
+    <string name="save_mobile_data">Сохранять мобильные данные</string>
+    <string name="articles">Статьи (%1$d)</string>
+</resources>

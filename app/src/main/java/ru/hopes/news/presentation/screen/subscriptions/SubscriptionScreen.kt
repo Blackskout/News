@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -105,7 +106,7 @@ fun SubscriptionsScreen(
                 }
                 item {
                     Text(
-                        text = "Articles (${state.articles.size})",
+                        text = stringResource(R.string.articles, state.articles.size),
                         fontWeight = FontWeight.Bold,
                     )
                 }
@@ -356,6 +357,7 @@ private fun ArticleCard(
                 val context = LocalContext.current
                 Button(
                     modifier = Modifier.weight(1f),
+                    contentPadding = PaddingValues(horizontal = 8.dp),
                     onClick = {
                         val intent = Intent(Intent.ACTION_VIEW, article.url.toUri())
                         context.startActivity(intent)
@@ -371,6 +373,7 @@ private fun ArticleCard(
 
                 Button(
                     modifier = Modifier.weight(1f),
+                    contentPadding = PaddingValues(horizontal = 8.dp),
                     onClick = {
                         val intent = Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"

@@ -27,4 +27,5 @@
     <string name="notifications">Notifications</string>
     <string name="show_notifications_about_new_articles">Show notifications about new articles</string>
     <string name="save_mobile_data">Save mobile data</string>
+    <string name="articles">Articles (%1$d)</string>
 </resources>

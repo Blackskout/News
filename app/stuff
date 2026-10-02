@@ -1,0 +1,30 @@
+Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        val buttonModifier = Modifier.weight(1f)
+
+        // Кнопка 1
+        Button(
+            modifier = buttonModifier,
+            contentPadding = PaddingValues(horizontal = 8.dp), // Уменьшаем внутренние поля
+            onClick = { /* ... */ }
+        ) {
+            Icon(CustomIcons.OpenInNew, null)
+            Spacer(Modifier.width(4.dp))
+            Text(stringResource(R.string.read), maxLines = 1, fontSize = 13.sp)
+        }
+
+        // Кнопка 2
+        Button(
+            modifier = buttonModifier,
+            contentPadding = PaddingValues(horizontal = 8.dp),
+            onClick = { /* ... */ }
+        ) {
+            Icon(CustomIcons.Share, null)
+            Spacer(Modifier.width(4.dp))
+            Text(stringResource(R.string.share), maxLines = 1, fontSize = 13.sp)
+        }
+    }
